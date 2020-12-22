@@ -1,5 +1,6 @@
 import 'package:chat/checkdata.dart';
 import 'package:chat/database.dart';
+import 'package:chat/historychat.dart';
 import 'package:chat/homepage.dart';
 import 'package:chat/registerpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('myName', _email);
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => HomePage(email: email),
+        builder: (context) => HistoryChat(email: email),
       ));
     } on FirebaseAuthException catch (e) {
       Navigator.of(context).push(MaterialPageRoute(

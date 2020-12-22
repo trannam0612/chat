@@ -25,19 +25,12 @@ class _ChatPageState extends State<ChatPage> {
   TextEditingController messageController = new TextEditingController();
   void initState() {
     getName();
-    getidRoomChat();
   }
 
   getName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       myName = prefs.getString('myName');
-    });
-  }
-
-  getidRoomChat() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
       idRoom = prefs.getString('idRoom');
     });
   }

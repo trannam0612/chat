@@ -1,3 +1,4 @@
+import 'package:chat/historychat.dart';
 import 'package:chat/homepage.dart';
 import 'package:chat/loginpage.dart';
 import 'package:chat/registerpage.dart';
@@ -42,7 +43,7 @@ class LandingPage extends StatelessWidget {
                   if (user == null) {
                     return LoginPage();
                   } else {
-                    return HomePage();
+                    return HistoryChat();
                   }
                 }
                 return Scaffold(

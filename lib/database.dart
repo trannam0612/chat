@@ -45,4 +45,18 @@ class FireData {
         .orderBy('time', descending: false)
         .snapshots();
   }
+
+  upLoadUser(String idRoom, userMapChat) {
+    // ignore: deprecated_member_use
+    Firestore.instance
+        .collection("roomsId")
+        // ignore: deprecated_member_use
+        .document(idRoom)
+        .set(userMapChat)
+        // ignore: deprecated_member_use
+
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
 }

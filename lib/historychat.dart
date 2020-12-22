@@ -1,20 +1,20 @@
 import 'package:chat/chatpage.dart';
-import 'package:chat/checkdata.dart';
 import 'package:chat/database.dart';
+import 'package:chat/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatefulWidget {
+class HistoryChat extends StatefulWidget {
   String email;
-  HomePage({this.email});
+  HistoryChat({this.email});
   @override
-  _HomePageState createState() => _HomePageState();
+  _HistoryChatState createState() => _HistoryChatState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HistoryChatState extends State<HistoryChat> {
   FireData _fireData = new FireData();
   String member;
   String _email;
@@ -56,6 +56,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.purple[400],
         title: _display(),
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ));
+          },
+        ),
         actions: [
           IconButton(
             icon: Image(image: AssetImage('assets/images/logout.png')),
@@ -67,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: StreamBuilder(
         // ignore: deprecated_member_use
-        stream: Firestore.instance.collection('user').snapshots(),
+        stream: Firestore.instance.collection('roomsId').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -89,12 +99,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onPressed: () {
                         _onClick();
-                        _email = document['mail'];
-                        member = document['name'];
+                        _email = document['0'];
+                        member = document['1'];
                         _createRoom();
                         print('member: ${this.member}');
                       },
-                      child: Text(document['name'])),
+                      child: Text(document['1'])),
                 ),
                 // Text(document['name'])
               );
